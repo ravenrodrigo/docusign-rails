@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_092749) do
+ActiveRecord::Schema.define(version: 2020_04_27_142149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 2020_04_27_092749) do
     t.integer "document_id"
     t.float "x"
     t.float "y"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "signature_templates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
