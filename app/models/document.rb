@@ -5,6 +5,6 @@ class Document < ApplicationRecord
   has_one :position
   has_many :signees
   # Validations
-
+  validates :documents, attached: true, content_type: [:pdf]
 
 end
