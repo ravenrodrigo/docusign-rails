@@ -13,6 +13,11 @@ RSpec.describe Document, type: :model do
     it { is_expected.to validate_presence_of(:expiration_date) }
   end
 
+  describe "associations" do
+    subject(:document) { build(:document) }
+    it { should have_one(:position).class_name('Position') }
+  end
+
   describe "attachments" do
    it "is valid" do
      subject.file.attach(io: File.open(fixture_path + '/dummy.pdf'), 
