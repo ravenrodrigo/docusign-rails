@@ -16,6 +16,7 @@ RSpec.describe Document, type: :model do
   describe "associations" do
     subject(:document) { build(:document) }
     it { should have_one(:position).class_name('Position') }
+    it { should belong_to(:signee).class_name('Signee') }
   end
 
   describe "attachments" do

@@ -4,6 +4,7 @@ class Document < ApplicationRecord
   # Associations
   has_one_attached :file
   has_one :position
+  belongs_to :signee
 
   # Validations
   validates :status, presence: true, inclusion: { in: Document.statuses.keys }

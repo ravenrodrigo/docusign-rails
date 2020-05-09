@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_07_055736) do
+ActiveRecord::Schema.define(version: 2020_05_09_054348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 2020_05_07_055736) do
     t.datetime "expiration_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "signee_id", null: false
+    t.index ["signee_id"], name: "index_documents_on_signee_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -54,6 +56,15 @@ ActiveRecord::Schema.define(version: 2020_05_07_055736) do
     t.index ["document_id"], name: "index_positions_on_document_id"
   end
 
+  create_table "signees", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "document_id"
+    t.integer "role"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "documents", "signees"
   add_foreign_key "positions", "documents"
 end
