@@ -8,9 +8,9 @@ RSpec.describe Position, type: :model do
     it { is_expected.to have_db_column(:y).of_type(:float) }
   end
 
-  describe "associations" do
-    subject(:position) { build(:position) }
+  describe Position do
     it { should belong_to(:document).class_name('Document') }
+    it { should belong_to(:signature).class_name('Signature') }
   end
 
   describe "validations" do

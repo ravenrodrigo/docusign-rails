@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_054348) do
+ActiveRecord::Schema.define(version: 2020_05_09_062340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -53,7 +53,16 @@ ActiveRecord::Schema.define(version: 2020_05_09_054348) do
     t.float "y"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "signature_id", null: false
     t.index ["document_id"], name: "index_positions_on_document_id"
+    t.index ["signature_id"], name: "index_positions_on_signature_id"
+  end
+
+  create_table "signatures", force: :cascade do |t|
+    t.integer "signee_id", null: false
+    t.integer "position_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "signees", force: :cascade do |t|
@@ -67,4 +76,5 @@ ActiveRecord::Schema.define(version: 2020_05_09_054348) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "documents", "signees"
   add_foreign_key "positions", "documents"
+  add_foreign_key "positions", "signatures"
 end
