@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   # Associations
   has_many :signees
+  has_one :signature_template
 end

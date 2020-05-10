@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_065734) do
+ActiveRecord::Schema.define(version: 2020_05_10_085259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(version: 2020_05_09_065734) do
     t.bigint "signature_id", null: false
     t.index ["document_id"], name: "index_positions_on_document_id"
     t.index ["signature_id"], name: "index_positions_on_signature_id"
+  end
+
+  create_table "signature_templates", force: :cascade do |t|
+    t.integer "user_id"
+    t.binary "file"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "signatures", force: :cascade do |t|
