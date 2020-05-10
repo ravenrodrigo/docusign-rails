@@ -11,6 +11,7 @@ RSpec.describe Signee, type: :model do
   describe Signee do
     it { should have_one(:document).class_name('Document') }
     it { should have_one(:signature).class_name('Signature') }
+    it { should belong_to(:user).class_name('User') }
   end
 
   describe "validations" do
